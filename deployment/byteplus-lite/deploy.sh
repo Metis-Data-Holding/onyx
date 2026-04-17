@@ -60,6 +60,7 @@ git -C "${REPO_ROOT}" merge --ff-only origin/deploy
 cd "${COMPOSE_DIR}"
 
 echo "Starting docker compose deployment..."
+# Keep HOST_PORT aligned with the .env file so compose and the health check use the same port.
 docker compose \
   --env-file "${BYTEPLUS_DIR}/.env" \
   -f docker-compose.yml \
@@ -76,5 +77,20 @@ docker compose \
   ps
 
 echo "Running health check on http://127.0.0.1:${HOST_PORT}..."
-curl --fail --silent --show-error --head --connect-timeout 5 --max-time 10 \
-  "http://127.0.0.1:${HOST_PORT}"
+max_attempts=5
+sleep_seconds=2
+
+for attempt in $(seq 1 "${max_attempts}"); do
+  if curl --fail --silent --show-error --head --connect-timeout 5 --max-time 10 \
+    "http://127.0.0.1:${HOST_PORT}"; then
+    exit 0
+  fi
+
+  if [[ "${attempt}" -lt "${max_attempts}" ]]; then
+    echo "Health check attempt ${attempt}/${max_attempts} failed; retrying in ${sleep_seconds}s..." >&2
+    sleep "${sleep_seconds}"
+  fi
+done
+
+echo "Health check failed after ${max_attempts} attempts: http://127.0.0.1:${HOST_PORT}" >&2
+exit 1
