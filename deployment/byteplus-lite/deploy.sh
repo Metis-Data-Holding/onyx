@@ -79,14 +79,15 @@ docker compose \
   -f ../byteplus-lite/docker-compose.byteplus-lite.yml \
   ps
 
-echo "Running health check on http://127.0.0.1:${HOST_PORT}..."
+health_check_url="http://127.0.0.1:${HOST_PORT}/api/health"
+echo "Running health check on ${health_check_url}..."
 health_check_attempts=12
 health_check_sleep_seconds=5
 health_check_curl_max_time_seconds=10
 
 for attempt in $(seq 1 "${health_check_attempts}"); do
   if curl --fail --silent --show-error --output /dev/null --connect-timeout 5 --max-time "${health_check_curl_max_time_seconds}" \
-    "http://127.0.0.1:${HOST_PORT}"; then
+    "${health_check_url}"; then
     exit 0
   fi
 
@@ -96,5 +97,5 @@ for attempt in $(seq 1 "${health_check_attempts}"); do
   fi
 done
 
-echo "Health check failed after ${health_check_attempts} attempts: http://127.0.0.1:${HOST_PORT}" >&2
+echo "Health check failed after ${health_check_attempts} attempts: ${health_check_url}" >&2
 exit 1
