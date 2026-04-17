@@ -42,6 +42,7 @@ fi
 REPO_ROOT="$(git -C "${BYTEPLUS_DIR}" rev-parse --show-toplevel)"
 ENV_FILE="${REPO_ROOT}/.env"
 COMPOSE_DIR="${REPO_ROOT}/deployment/docker_compose"
+COMPOSE_ENV_FILE="${COMPOSE_DIR}/.env"
 
 if [[ ! -f "${ENV_FILE}" ]]; then
   echo "Missing ${ENV_FILE}. Please copy .env.example to ${ENV_FILE} before running this deployment script." >&2
@@ -53,10 +54,11 @@ HOST_PORT="${HOST_PORT_FROM_ENV:-39000}"
 
 echo "Fetching latest deploy branch..."
 git -C "${REPO_ROOT}" fetch origin deploy
-echo "Checking out deploy branch..."
-git -C "${REPO_ROOT}" checkout deploy
-echo "Fast-forwarding from origin/deploy..."
-git -C "${REPO_ROOT}" merge --ff-only origin/deploy
+echo "Checking out deploy branch from origin/deploy..."
+git -C "${REPO_ROOT}" checkout -B deploy origin/deploy
+
+echo "Linking compose env file to root .env..."
+ln -sfn "${ENV_FILE}" "${COMPOSE_ENV_FILE}"
 
 cd "${COMPOSE_DIR}"
 
