@@ -3,7 +3,6 @@
 set -euo pipefail
 
 BYTEPLUS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ENV_FILE="${BYTEPLUS_DIR}/.env"
 
 read_env_value() {
   local key="$1"
@@ -35,18 +34,20 @@ read_env_value() {
   ' "${ENV_FILE}"
 }
 
-if [[ ! -f "${ENV_FILE}" ]]; then
-  echo "Missing ${ENV_FILE}. Please create it before running this deployment script." >&2
-  exit 1
-fi
-
 if ! git -C "${BYTEPLUS_DIR}" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   echo "This script must be run inside a git checkout." >&2
   exit 1
 fi
 
 REPO_ROOT="$(git -C "${BYTEPLUS_DIR}" rev-parse --show-toplevel)"
+ENV_FILE="${REPO_ROOT}/.env"
 COMPOSE_DIR="${REPO_ROOT}/deployment/docker_compose"
+
+if [[ ! -f "${ENV_FILE}" ]]; then
+  echo "Missing ${ENV_FILE}. Please copy .env.example to ${ENV_FILE} before running this deployment script." >&2
+  exit 1
+fi
+
 HOST_PORT_FROM_ENV="$(read_env_value HOST_PORT || true)"
 HOST_PORT="${HOST_PORT_FROM_ENV:-39000}"
 
@@ -62,7 +63,7 @@ cd "${COMPOSE_DIR}"
 echo "Starting docker compose deployment..."
 # Keep HOST_PORT aligned with the .env file so compose and the health check use the same port.
 docker compose \
-  --env-file "${BYTEPLUS_DIR}/.env" \
+  --env-file "${ENV_FILE}" \
   -f docker-compose.yml \
   -f docker-compose.onyx-lite.yml \
   -f ../byteplus-lite/docker-compose.byteplus-lite.yml \
@@ -70,7 +71,7 @@ docker compose \
 
 echo "Showing docker compose status..."
 docker compose \
-  --env-file "${BYTEPLUS_DIR}/.env" \
+  --env-file "${ENV_FILE}" \
   -f docker-compose.yml \
   -f docker-compose.onyx-lite.yml \
   -f ../byteplus-lite/docker-compose.byteplus-lite.yml \
