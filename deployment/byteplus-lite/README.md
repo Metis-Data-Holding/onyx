@@ -44,19 +44,59 @@ Create DNS records for `onyx.metisdata.ai` so the hostname resolves to the ByteP
 
 ## First deployment
 
-1. Create `/opt/metis/onyx` on the ECS host.
-2. Copy `.env.example` to `/opt/metis/onyx/.env` and update any secrets before launch.
-3. Install the host Nginx snippet for `onyx.metisdata.ai`.
-4. Bring up the Onyx Lite stack from `/opt/metis/onyx` using the approved deployment entry for this environment.
-5. Verify the app responds through `https://onyx.metisdata.ai`.
+1. Create `/opt/metis/onyx` on the ECS host and ensure this repository is checked out there.
+2. Copy `deployment/byteplus-lite/.env.example` to `/opt/metis/onyx/.env`, then set at least:
+   - `POSTGRES_PASSWORD`
+   - `USER_AUTH_SECRET`
+   - `WEB_DOMAIN=https://onyx.metisdata.ai`
+3. Install the host Nginx snippet for `onyx.metisdata.ai`, test config, and reload host Nginx.
+4. Run deployment from repo root:
+   ```bash
+   cd /opt/metis/onyx
+   chmod +x deployment/byteplus-lite/deploy.sh
+   ./deployment/byteplus-lite/deploy.sh
+   ```
+
+## First-run validation
+
+After deployment finishes, run this checklist in order:
+
+1. Compose status:
+   Run `docker compose ps` with the BytePlus overlay:
+   ```bash
+   cd /opt/metis/onyx/deployment/docker_compose
+   docker compose \
+     --env-file /opt/metis/onyx/.env \
+     -f docker-compose.yml \
+     -f docker-compose.onyx-lite.yml \
+     -f ../byteplus-lite/docker-compose.byteplus-lite.yml \
+     ps
+   ```
+2. Local ingress health:
+   ```bash
+   curl http://127.0.0.1:39000
+   ```
+3. External access:
+   - Open `https://onyx.metisdata.ai`
+   - Confirm the login page loads
+4. Authentication:
+   - Sign in with `basic` auth credentials
+5. Model setup:
+   - Open admin settings
+   - Configure your model provider and API key
+   - Send a simple chat to verify model calls succeed
 
 ## Rollback
 
-Rollback starts from the same deployment root:
+Rollback from the same deployment root:
 
-1. Restore the previous known-good `.env` and image tag.
-2. Reapply the prior deployment entry from `/opt/metis/onyx`.
-3. Reload or restart the host Nginx config if the gateway file changed.
-
-If the failure is in the reverse proxy only, rollback can be limited to restoring the previous
-`onyx.metisdata.ai` Nginx include and reloading Nginx.
+1. Return to the previous known-good git revision:
+   ```bash
+   cd /opt/metis/onyx
+   git checkout <previous-good-sha-or-tag>
+   ```
+2. Re-run deployment:
+   ```bash
+   ./deployment/byteplus-lite/deploy.sh
+   ```
+3. If the issue is gateway-only, restore the previous host Nginx config for `onyx.metisdata.ai` and reload host Nginx.
