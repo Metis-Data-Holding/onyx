@@ -77,20 +77,21 @@ docker compose \
   ps
 
 echo "Running health check on http://127.0.0.1:${HOST_PORT}..."
-max_attempts=5
-sleep_seconds=2
+health_check_attempts=12
+health_check_sleep_seconds=5
+health_check_curl_max_time_seconds=10
 
-for attempt in $(seq 1 "${max_attempts}"); do
-  if curl --fail --silent --show-error --head --connect-timeout 5 --max-time 10 \
+for attempt in $(seq 1 "${health_check_attempts}"); do
+  if curl --fail --silent --show-error --output /dev/null --connect-timeout 5 --max-time "${health_check_curl_max_time_seconds}" \
     "http://127.0.0.1:${HOST_PORT}"; then
     exit 0
   fi
 
-  if [[ "${attempt}" -lt "${max_attempts}" ]]; then
-    echo "Health check attempt ${attempt}/${max_attempts} failed; retrying in ${sleep_seconds}s..." >&2
-    sleep "${sleep_seconds}"
+  if [[ "${attempt}" -lt "${health_check_attempts}" ]]; then
+    echo "Health check attempt ${attempt}/${health_check_attempts} failed; retrying in ${health_check_sleep_seconds}s..." >&2
+    sleep "${health_check_sleep_seconds}"
   fi
 done
 
-echo "Health check failed after ${max_attempts} attempts: http://127.0.0.1:${HOST_PORT}" >&2
+echo "Health check failed after ${health_check_attempts} attempts: http://127.0.0.1:${HOST_PORT}" >&2
 exit 1
