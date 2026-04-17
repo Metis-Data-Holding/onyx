@@ -7,6 +7,8 @@ This directory contains the minimal deployment helpers for the BytePlus-hosted O
 - Domain: `onyx.metisdata.ai`
 - Recommended server directory: `/opt/metis/onyx`
 - Copy `.env.example` to `.env` before starting the stack
+- This `.env.example` is meant to be used with the BytePlus overlay under `deployment/byteplus-lite`, not
+  with the raw official compose files by itself.
 
 ## Files in this directory
 
@@ -25,6 +27,9 @@ The included Nginx example shows the approved gateway shape:
 - disable proxy buffering
 - set `proxy_read_timeout 86400s`
 - set `client_max_body_size 512m`
+
+The Nginx example includes a top-level `map`, so place it in an `http`-level include on the host Nginx
+configuration. Do not drop it into a standalone `server` include block.
 
 Place the final gateway config in the host Nginx include path used by your BytePlus gateway and reload Nginx
 after validation.
@@ -55,4 +60,3 @@ Rollback starts from the same deployment root:
 
 If the failure is in the reverse proxy only, rollback can be limited to restoring the previous
 `onyx.metisdata.ai` Nginx include and reloading Nginx.
-
