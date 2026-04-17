@@ -1,0 +1,62 @@
+name: Deploy BytePlus ECS
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Start SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.BYTEPLUS_SERVER_SSH_KEY }}
+
+      - name: Add server host key to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -p "${{ secrets.BYTEPLUS_SERVER_PORT }}" "${{ secrets.BYTEPLUS_SERVER_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Deploy on remote ECS host
+        env:
+          BYTEPLUS_SERVER_HOST: ${{ secrets.BYTEPLUS_SERVER_HOST }}
+          BYTEPLUS_SERVER_PORT: ${{ secrets.BYTEPLUS_SERVER_PORT }}
+          BYTEPLUS_SERVER_USER: ${{ secrets.BYTEPLUS_SERVER_USER }}
+          BYTEPLUS_DEPLOY_PATH: ${{ secrets.BYTEPLUS_DEPLOY_PATH }}
+        run: |
+          set -euo pipefail
+
+          ssh -p "${BYTEPLUS_SERVER_PORT}" "${BYTEPLUS_SERVER_USER}@${BYTEPLUS_SERVER_HOST}" \
+            "BYTEPLUS_DEPLOY_PATH='${BYTEPLUS_DEPLOY_PATH}' GITHUB_REPOSITORY='${GITHUB_REPOSITORY}' bash -s" <<'EOF'
+          set -euo pipefail
+
+          REPO_URL="https://github.com/${GITHUB_REPOSITORY}.git"
+          DEPLOY_PATH="${BYTEPLUS_DEPLOY_PATH}"
+
+          mkdir -p "${DEPLOY_PATH}"
+
+          if [ ! -d "${DEPLOY_PATH}/.git" ]; then
+            if [ -n "$(ls -A "${DEPLOY_PATH}" 2>/dev/null)" ]; then
+              echo "Deployment path exists but is not a git checkout: ${DEPLOY_PATH}" >&2
+              exit 1
+            fi
+            git clone --branch deploy --single-branch "${REPO_URL}" "${DEPLOY_PATH}"
+          else
+            cd "${DEPLOY_PATH}"
+            git fetch origin deploy
+            git checkout -B deploy origin/deploy
+          fi
+
+          cd "${DEPLOY_PATH}"
+          chmod +x deployment/byteplus-lite/deploy.sh
+          ./deployment/byteplus-lite/deploy.sh
+          EOF
