@@ -62,32 +62,41 @@ ln -sfn "${ENV_FILE}" "${COMPOSE_ENV_FILE}"
 
 cd "${COMPOSE_DIR}"
 
+compose_args=(
+  --env-file "${ENV_FILE}"
+  -f docker-compose.yml
+  -f docker-compose.onyx-lite.yml
+  -f ../byteplus-lite/docker-compose.byteplus-lite.yml
+)
+
+compose() {
+  docker compose "${compose_args[@]}" "$@"
+}
+
+dump_compose_diagnostics() {
+  echo "Docker compose status after health check failure:" >&2
+  compose ps >&2 || true
+  echo "Recent docker compose logs after health check failure:" >&2
+  compose logs --tail=200 nginx api_server web_server relational_db >&2 || true
+}
+
 echo "Starting docker compose deployment..."
 # Keep HOST_PORT aligned with the .env file so compose and the health check use the same port.
-docker compose \
-  --env-file "${ENV_FILE}" \
-  -f docker-compose.yml \
-  -f docker-compose.onyx-lite.yml \
-  -f ../byteplus-lite/docker-compose.byteplus-lite.yml \
-  up -d --build --remove-orphans
+compose up -d --build --remove-orphans
 
 echo "Showing docker compose status..."
-docker compose \
-  --env-file "${ENV_FILE}" \
-  -f docker-compose.yml \
-  -f docker-compose.onyx-lite.yml \
-  -f ../byteplus-lite/docker-compose.byteplus-lite.yml \
-  ps
+compose ps
 
 health_check_url="http://127.0.0.1:${HOST_PORT}/api/health"
 echo "Running health check on ${health_check_url}..."
-health_check_attempts=12
+health_check_attempts=24
 health_check_sleep_seconds=5
 health_check_curl_max_time_seconds=10
 
 for attempt in $(seq 1 "${health_check_attempts}"); do
   if curl --fail --silent --show-error --output /dev/null --connect-timeout 5 --max-time "${health_check_curl_max_time_seconds}" \
     "${health_check_url}"; then
+    echo "Health check succeeded on attempt ${attempt}/${health_check_attempts}."
     exit 0
   fi
 
@@ -98,4 +107,5 @@ for attempt in $(seq 1 "${health_check_attempts}"); do
 done
 
 echo "Health check failed after ${health_check_attempts} attempts: ${health_check_url}" >&2
+dump_compose_diagnostics
 exit 1
