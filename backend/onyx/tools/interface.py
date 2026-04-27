@@ -11,6 +11,7 @@ from onyx.chat.emitter import Emitter
 from onyx.server.query_and_chat.placement import Placement
 from onyx.tools.models import ToolResponse
 
+
 TOverride = TypeVar("TOverride")
 
 

@@ -51,16 +51,14 @@ test.describe("LLM Ordering", () => {
     await page.waitForSelector('[role="dialog"]', { timeout: 5000 });
 
     const dialog = page.locator('[role="dialog"]');
-    const allModelItems = dialog.locator("[data-interactive-state]");
+    const allModelItems = dialog.locator("[data-selected]");
     await expect(allModelItems.first()).toBeVisible({ timeout: 5000 });
 
     const count = await allModelItems.count();
     expect(count).toBeGreaterThan(0);
 
     // Pick the first non-selected model so the trigger text changes after click
-    const nonSelectedItem = dialog
-      .locator('[data-interactive-state="empty"]')
-      .first();
+    const nonSelectedItem = dialog.locator('[data-selected="false"]').first();
     const hasNonSelected = (await nonSelectedItem.count()) > 0;
     const targetItem = hasNonSelected ? nonSelectedItem : allModelItems.first();
 

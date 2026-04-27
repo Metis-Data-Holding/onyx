@@ -6,6 +6,7 @@ import pytest
 
 from onyx.voice.providers.azure import AzureVoiceProvider
 
+
 # --- _is_azure_cloud_url ---
 
 

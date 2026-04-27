@@ -2,7 +2,7 @@
 
 import { ThreeDotsLoader } from "@/components/Loading";
 import { PageSelector } from "@/components/PageSelector";
-import { SvgInfo } from "@opal/icons";
+import { InfoIcon } from "@/components/icons/icons";
 import {
   Table,
   TableHead,
@@ -415,7 +415,7 @@ function Main() {
 export default function Page() {
   return (
     <SettingsLayouts.Root>
-      <SettingsLayouts.Header icon={route.icon} title={route.title} divider />
+      <SettingsLayouts.Header icon={route.icon} title={route.title} separator />
       <SettingsLayouts.Body>
         <Main />
       </SettingsLayouts.Body>

@@ -1,8 +1,7 @@
 "use client";
 
 import type { IconFunctionComponent, RichStr } from "@opal/types";
-import { Text } from "@opal/components";
-import type { TextFont } from "@opal/components";
+import { Text, type TextFont } from "@opal/components/text/components";
 import { toPlainString } from "@opal/components/text/InlineMarkdown";
 import { cn } from "@opal/utils";
 

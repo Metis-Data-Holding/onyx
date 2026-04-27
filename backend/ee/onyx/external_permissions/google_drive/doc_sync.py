@@ -164,12 +164,7 @@ def get_external_access_for_raw_gdrive_file(
             if permission.email_address:
                 user_emails.add(permission.email_address)
             else:
-                # Expected per-doc condition when a Drive permission is
-                # attached to an account without a surfaced email (service
-                # accounts, deleted users, external share links). We just
-                # skip the permission — warn instead of error so the doc_id
-                # in the message doesn't explode Sentry fingerprinting.
-                logger.warning(
+                logger.error(
                     f"Permission is type `user` but no email address is provided for document {doc_id}\n {permission}"
                 )
         elif permission.type == PermissionType.GROUP:
@@ -177,7 +172,7 @@ def get_external_access_for_raw_gdrive_file(
             if permission.email_address:
                 group_emails.add(permission.email_address)
             else:
-                logger.warning(
+                logger.error(
                     f"Permission is type `group` but no email address is provided for document {doc_id}\n {permission}"
                 )
         elif permission.type == PermissionType.DOMAIN and company_domain:

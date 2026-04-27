@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { handleEnterPress, useEscapePress } from "@/lib/typingUtils";
 import { UNNAMED_CHAT } from "@/lib/constants";
-import { cn } from "@opal/utils";
+import { cn } from "@/lib/utils";
 
 interface ButtonRenamingProps {
   initialName: string | null;

@@ -272,7 +272,7 @@ function EditGroupPage({ groupId }: EditGroupPageProps) {
         <SettingsLayouts.Header
           icon={SvgUsers}
           title="Group Not Found"
-          divider
+          separator
         />
         <SettingsLayouts.Body>
           <IllustrationContent
@@ -313,7 +313,7 @@ function EditGroupPage({ groupId }: EditGroupPageProps) {
         <SettingsLayouts.Header
           icon={SvgUsers}
           title="Edit Group"
-          divider
+          separator
           rightChildren={headerActions}
         />
 

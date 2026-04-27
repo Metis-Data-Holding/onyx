@@ -29,7 +29,7 @@ function GroupsPage() {
   return (
     <SettingsLayouts.Root>
       <div data-testid="groups-page-heading">
-        <SettingsLayouts.Header icon={SvgUsers} title="Groups" divider>
+        <SettingsLayouts.Header icon={SvgUsers} title="Groups" separator>
           <MessageCard
             variant="info"
             title="Upcoming changes to permissions"

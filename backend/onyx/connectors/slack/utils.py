@@ -199,16 +199,10 @@ class SlackTextCleaner:
                     or response["user"]["profile"]["real_name"]
                 )
             except SlackApiError as e:
-                # Common per-message condition: user was deleted, workspace
-                # migrated, bot lacks users:read, etc. Cache the raw id as a
-                # fallback so we don't re-hit the API for the same bad id on
-                # every message, and keep the event out of Sentry — the
-                # message indexing path continues with the id in place of
-                # the display name (ONYX-BACKEND-H6FN).
-                logger.warning(
+                logger.exception(
                     f"Error fetching data for user {user_id}: {e.response['error']}"
                 )
-                self._id_to_name_map[user_id] = user_id
+                raise
 
         return self._id_to_name_map[user_id]
 
@@ -226,12 +220,9 @@ class SlackTextCleaner:
 
                 # Replace the user ID with the username in the message
                 message = message.replace(f"<@{user_id}>", f"@{user_name}")
-            except Exception as e:
-                # _get_slack_name no longer raises on SlackApiError, so this
-                # only fires on unexpected errors (e.g. malformed response);
-                # still defensive, but not actionable per-message — warn.
-                logger.warning(
-                    f"Unable to replace user ID with username for user_id '{user_id}': {e}"
+            except Exception:
+                logger.exception(
+                    f"Unable to replace user ID with username for user_id '{user_id}'"
                 )
 
         return message

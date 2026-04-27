@@ -3,7 +3,7 @@
 import { ValidSources } from "@/lib/types";
 import { SourceIcon } from "./SourceIcon";
 import { useState } from "react";
-import { SvgOnyxLogo, SvgGithub } from "@opal/logos";
+import { GithubIcon, OnyxIcon } from "./icons/icons";
 
 export function WebResultIcon({
   url,
@@ -22,9 +22,9 @@ export function WebResultIcon({
   return (
     <>
       {hostname.includes("onyx.app") ? (
-        <SvgOnyxLogo size={size} className="dark:text-[#fff] text-[#000]" />
+        <OnyxIcon size={size} className="dark:text-[#fff] text-[#000]" />
       ) : hostname === "github.com" || hostname.endsWith(".github.com") ? (
-        <SvgGithub size={size} />
+        <GithubIcon size={size} />
       ) : !error ? (
         <img
           className="my-0 rounded-full py-0"

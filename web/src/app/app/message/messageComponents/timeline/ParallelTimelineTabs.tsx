@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo, useCallback } from "react";
-import { cn } from "@opal/utils";
+import { cn } from "@/lib/utils";
 import { StopReason } from "@/app/app/services/streamingModels";
 import { FullChatState } from "../interfaces";
 import { TurnGroup } from "./transformers";

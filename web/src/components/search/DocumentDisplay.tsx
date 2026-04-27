@@ -1,6 +1,5 @@
 "use client";
-
-import { JSX } from "react";
+import React, { JSX } from "react";
 import { MinimalOnyxDocument, OnyxDocument } from "@/lib/search/interfaces";
 import { SourceIcon } from "../SourceIcon";
 import { WebResultIcon } from "../WebResultIcon";

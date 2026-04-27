@@ -87,7 +87,7 @@ function CreateGroupPage() {
       <SettingsLayouts.Header
         icon={SvgUsers}
         title="Create Group"
-        divider
+        separator
         rightChildren={headerActions}
       />
 

@@ -8,6 +8,7 @@ from onyx.configs.constants import FederatedConnectorSource
 from onyx.server.features.document_set.models import DocumentSetSummary
 from onyx.server.features.persona.models import MinimalPersonaSnapshot
 
+
 _STUB_DS_SUMMARY = DocumentSetSummary(
     id=1,
     name="stub",

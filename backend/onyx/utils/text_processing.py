@@ -6,6 +6,7 @@ from urllib.parse import quote
 
 from onyx.utils.logger import setup_logger
 
+
 logger = setup_logger(__name__)
 
 # Mapping of curly/smart quotes to straight quotes

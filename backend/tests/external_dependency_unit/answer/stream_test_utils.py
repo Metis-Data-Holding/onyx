@@ -67,7 +67,7 @@ def create_chat_session(
 ) -> ChatSession:
     return create_chat_session_from_request(
         chat_session_request=ChatSessionCreationRequest(),
-        user=user,
+        user_id=user.id,
         db_session=db_session,
     )
 

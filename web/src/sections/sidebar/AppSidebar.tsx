@@ -1,7 +1,8 @@
 "use client";
 
 import { useCallback, memo, useMemo, useState, useEffect, useRef } from "react";
-import useNotifications from "@/hooks/useNotifications";
+import useSWR from "swr";
+import { SWR_KEYS } from "@/lib/swr-keys";
 import { useRouter } from "next/navigation";
 import { useSettingsContext } from "@/providers/SettingsProvider";
 import { MinimalPersonaSnapshot } from "@/app/admin/agents/interfaces";
@@ -43,7 +44,7 @@ import type { Project } from "@/app/app/projects/projectsService";
 import * as SidebarLayouts from "@/layouts/sidebar-layouts";
 import { useSidebarFolded } from "@/layouts/sidebar-layouts";
 import { Button as OpalButton } from "@opal/components";
-import { cn } from "@opal/utils";
+import { cn } from "@/lib/utils";
 import {
   DRAG_TYPES,
   DEFAULT_PERSONA_ID,
@@ -73,7 +74,8 @@ import { CRAFT_PATH } from "@/app/craft/v1/constants";
 import { usePostHog } from "posthog-js/react";
 import { track, AnalyticsEvent } from "@/lib/analytics";
 import { motion, AnimatePresence } from "motion/react";
-import { NotificationType } from "@/interfaces/settings";
+import { Notification, NotificationType } from "@/interfaces/settings";
+import { errorHandlingFetcher } from "@/lib/fetcher";
 import AccountPopover from "@/sections/sidebar/AccountPopover";
 import ChatSearchCommandMenu from "@/sections/sidebar/ChatSearchCommandMenu";
 import { useQueryController } from "@/providers/QueryControllerProvider";
@@ -244,7 +246,9 @@ const MemoizedAppSidebarInner = memo(function AppSidebarInner() {
     useState(false);
 
   // Fetch notifications for build mode intro
-  const { notifications, refresh: mutateNotifications } = useNotifications();
+  const { data: notifications, mutate: mutateNotifications } = useSWR<
+    Notification[]
+  >(SWR_KEYS.notifications, errorHandlingFetcher);
 
   // Check if Onyx Craft is enabled via settings (backed by PostHog feature flag)
   // Only explicit true enables the feature; false or undefined = disabled

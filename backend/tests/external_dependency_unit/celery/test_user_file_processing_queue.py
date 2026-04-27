@@ -32,7 +32,9 @@ from uuid import uuid4
 
 from sqlalchemy.orm import Session
 
-from onyx.background.celery.tasks.user_file_processing.tasks import _user_file_lock_key
+from onyx.background.celery.tasks.user_file_processing.tasks import (
+    _user_file_lock_key,
+)
 from onyx.background.celery.tasks.user_file_processing.tasks import (
     _user_file_queued_key,
 )

@@ -6,6 +6,7 @@ from pydantic import BaseModel
 from onyx.db.enums import HookFailStrategy
 from onyx.db.enums import HookPoint
 
+
 _REQUIRED_ATTRS = (
     "hook_point",
     "display_name",

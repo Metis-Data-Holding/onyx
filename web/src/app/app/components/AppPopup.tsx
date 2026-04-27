@@ -5,14 +5,13 @@ import { SettingsContext } from "@/providers/SettingsProvider";
 import { Button } from "@opal/components";
 import Text from "@/refresh-components/texts/Text";
 import { FormField } from "@/refresh-components/form/FormField";
-import { Checkbox } from "@opal/components";
+import Checkbox from "@/refresh-components/inputs/Checkbox";
 import { useContext, useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { transformLinkUri } from "@/lib/utils";
 import { SvgAlertCircle } from "@opal/icons";
-import { SvgOnyxLogo } from "@opal/logos";
-import type { IconProps } from "@opal/types";
+import { IconProps, OnyxIcon } from "@/components/icons/icons";
 
 const ALL_USERS_INITIAL_POPUP_FLOW_COMPLETED =
   "allUsersInitialPopupFlowCompleted";
@@ -65,12 +64,12 @@ export function AppPopup() {
   // - Otherwise -> show uploaded custom logo (fallback to Onyx icon)
   const headerIcon =
     !hasApplicationName && !hasCustomLogo
-      ? (props: IconProps) => <SvgOnyxLogo size={24} {...props} />
+      ? (props: IconProps) => <OnyxIcon size={24} {...props} />
       : logoDisplayStyle === "name_only"
         ? SvgAlertCircle
         : hasCustomLogo
           ? CustomLogoHeaderIcon
-          : (props: IconProps) => <SvgOnyxLogo size={24} {...props} />;
+          : (props: IconProps) => <OnyxIcon size={24} {...props} />;
 
   return (
     <Modal open onOpenChange={() => {}}>

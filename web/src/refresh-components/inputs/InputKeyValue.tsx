@@ -69,7 +69,7 @@
  */
 
 import React, { useCallback, useEffect, useMemo, useRef } from "react";
-import { cn } from "@opal/utils";
+import { cn } from "@/lib/utils";
 import InputTypeIn from "./InputTypeIn";
 import { Button, EmptyMessageCard } from "@opal/components";
 import type { WithoutStyles } from "@opal/types";

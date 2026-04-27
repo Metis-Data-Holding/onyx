@@ -38,9 +38,6 @@ interface MessageCardBaseProps {
   /** Padding preset. @default "sm" */
   padding?: Extract<PaddingVariants, "sm" | "xs">;
 
-  /** Padding around the header Content area. @default "fit" */
-  headerPadding?: PaddingVariants;
-
   /**
    * Content rendered below a divider, under the main content area.
    * When provided, a `Divider` is inserted between the `ContentAction` and this node.
@@ -125,7 +122,6 @@ function MessageCard({
   title,
   description,
   padding = "sm",
-  headerPadding = "fit",
   bottomChildren,
   rightChildren,
   onClose,
@@ -150,22 +146,19 @@ function MessageCard({
     <div
       className={cn("opal-message-card", paddingVariants[padding])}
       data-variant={variant}
-      data-opal-status-border={variant}
       ref={ref}
     >
-      <div className={paddingVariants[headerPadding]}>
-        <ContentAction
-          icon={(props) => (
-            <Icon {...props} className={cn(props.className, iconClass)} />
-          )}
-          title={title}
-          description={description}
-          sizePreset="main-ui"
-          variant="section"
-          padding="md"
-          rightChildren={right}
-        />
-      </div>
+      <ContentAction
+        icon={(props) => (
+          <Icon {...props} className={cn(props.className, iconClass)} />
+        )}
+        title={title}
+        description={description}
+        sizePreset="main-ui"
+        variant="section"
+        padding="md"
+        rightChildren={right}
+      />
 
       {bottomChildren && (
         <>

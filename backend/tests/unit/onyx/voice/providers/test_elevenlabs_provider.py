@@ -5,6 +5,7 @@ from onyx.voice.providers.elevenlabs import DEFAULT_ELEVENLABS_API_BASE
 from onyx.voice.providers.elevenlabs import ElevenLabsSTTMessageType
 from onyx.voice.providers.elevenlabs import ElevenLabsVoiceProvider
 
+
 # --- _http_to_ws_url ---
 
 

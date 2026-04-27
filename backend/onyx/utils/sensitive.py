@@ -19,6 +19,7 @@ from unittest.mock import MagicMock
 from onyx.utils.encryption import mask_credential_dict
 from onyx.utils.encryption import mask_string
 
+
 T = TypeVar("T", str, dict[str, Any])
 
 

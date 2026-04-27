@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { cn } from "@opal/utils";
+import { cn } from "@/lib/utils";
 import hljs from "highlight.js/lib/core";
 
 // Import highlight.js theme styles (dark mode Atom One Dark)

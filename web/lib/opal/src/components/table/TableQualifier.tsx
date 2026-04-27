@@ -5,7 +5,7 @@ import { cn } from "@opal/utils";
 import { useTableSize } from "@opal/components/table/TableSizeContext";
 import type { IconFunctionComponent } from "@opal/types";
 import type { QualifierContentType } from "@opal/components/table/types";
-import { Checkbox } from "@opal/components";
+import Checkbox from "@/refresh-components/inputs/Checkbox";
 
 interface TableQualifierProps {
   /** Content type displayed in the qualifier */

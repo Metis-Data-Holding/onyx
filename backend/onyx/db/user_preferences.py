@@ -25,6 +25,7 @@ from onyx.server.manage.models import MemoryItem
 from onyx.server.manage.models import UserSpecificAssistantPreference
 from onyx.utils.logger import setup_logger
 
+
 logger = setup_logger()
 
 

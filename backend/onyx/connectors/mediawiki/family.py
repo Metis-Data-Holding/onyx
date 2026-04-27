@@ -16,6 +16,7 @@ from pywikibot.scripts.generate_user_files import pywikibot
 
 from onyx.utils.logger import setup_logger
 
+
 logger = setup_logger()
 
 pywikibot.config.base_dir = tempfile.TemporaryDirectory().name

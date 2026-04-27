@@ -20,8 +20,7 @@ Commands:
   exec      Run a command inside the devcontainer
   restart   Remove and recreate the devcontainer
   rebuild   Pull the latest image and recreate
-  stop      Stop the running devcontainer
-  tunnel    Tunnel a devcontainer port to the host`,
+  stop      Stop the running devcontainer`,
 	}
 
 	cmd.AddCommand(newDevUpCommand())
@@ -30,7 +29,6 @@ Commands:
 	cmd.AddCommand(newDevRestartCommand())
 	cmd.AddCommand(newDevRebuildCommand())
 	cmd.AddCommand(newDevStopCommand())
-	cmd.AddCommand(newDevTunnelCommand())
 
 	return cmd
 }

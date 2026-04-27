@@ -5,7 +5,7 @@ import { useSWRConfig } from "swr";
 import { toast } from "@/hooks/useToast";
 import { useAdminLLMProviders } from "@/hooks/useLLMProviders";
 import { ThreeDotsLoader } from "@/components/Loading";
-import { Content, ContentAction, InputHorizontal } from "@opal/layouts";
+import { Content, Card as CardLayout, InputHorizontal } from "@opal/layouts";
 import {
   Button,
   Divider,
@@ -140,15 +140,20 @@ function ExistingProviderCard({
           rounding="lg"
           onClick={() => setIsOpen(true)}
         >
-          <ContentAction
-            icon={icon}
-            title={provider.name}
-            description={companyName}
-            sizePreset="main-ui"
-            variant="section"
-            padding="lg"
-            tag={isDefault ? { title: "Default", color: "blue" } : undefined}
-            rightChildren={
+          <CardLayout.Header
+            headerChildren={
+              <Content
+                icon={icon}
+                title={provider.name}
+                description={companyName}
+                sizePreset="main-ui"
+                variant="section"
+                tag={
+                  isDefault ? { title: "Default", color: "blue" } : undefined
+                }
+              />
+            }
+            topRightChildren={
               <div className="flex flex-row">
                 <Hoverable.Item
                   group="ExistingProviderCard"
@@ -205,14 +210,17 @@ function NewProviderCard({
       rounding="lg"
       onClick={() => setIsOpen(true)}
     >
-      <ContentAction
-        icon={icon}
-        title={productName}
-        description={companyName}
-        sizePreset="main-ui"
-        variant="section"
-        padding="lg"
-        rightChildren={
+      <CardLayout.Header
+        headerChildren={
+          <Content
+            icon={icon}
+            title={productName}
+            description={companyName}
+            sizePreset="main-ui"
+            variant="section"
+          />
+        }
+        topRightChildren={
           <Button
             rightIcon={SvgArrowExchange}
             prominence="tertiary"
@@ -253,14 +261,17 @@ function NewCustomProviderCard({
       rounding="lg"
       onClick={() => setIsOpen(true)}
     >
-      <ContentAction
-        icon={icon}
-        title={productName}
-        description={companyName}
-        sizePreset="main-ui"
-        variant="section"
-        padding="lg"
-        rightChildren={
+      <CardLayout.Header
+        headerChildren={
+          <Content
+            icon={icon}
+            title={productName}
+            description={companyName}
+            sizePreset="main-ui"
+            variant="section"
+          />
+        }
+        topRightChildren={
           <Button
             rightIcon={SvgArrowExchange}
             prominence="tertiary"
@@ -335,7 +346,7 @@ export default function LLMConfigurationPage() {
 
   return (
     <SettingsLayouts.Root>
-      <SettingsLayouts.Header icon={route.icon} title={route.title} divider />
+      <SettingsLayouts.Header icon={route.icon} title={route.title} separator />
 
       <SettingsLayouts.Body>
         {hasProviders ? (

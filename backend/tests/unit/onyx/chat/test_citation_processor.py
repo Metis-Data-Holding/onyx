@@ -24,6 +24,7 @@ from onyx.configs.constants import DocumentSource
 from onyx.context.search.models import SearchDoc
 from onyx.server.query_and_chat.streaming_models import CitationInfo
 
+
 # ============================================================================
 # Helper Functions and Fixtures
 # ============================================================================

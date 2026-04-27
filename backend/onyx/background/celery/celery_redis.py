@@ -12,6 +12,7 @@ from onyx.configs.app_configs import REDIS_HEALTH_CHECK_INTERVAL
 from onyx.configs.constants import OnyxCeleryPriority
 from onyx.configs.constants import REDIS_SOCKET_KEEPALIVE_OPTIONS
 
+
 _broker_client: Redis | None = None
 _broker_url: str | None = None
 _broker_client_lock = threading.Lock()

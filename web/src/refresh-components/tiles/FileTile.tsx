@@ -1,7 +1,6 @@
 import type { FunctionComponent } from "react";
 
-import { noProp } from "@/lib/utils";
-import { cn } from "@opal/utils";
+import { cn, noProp } from "@/lib/utils";
 import { SvgMaximize2, SvgTextLines, SvgX } from "@opal/icons";
 import type { IconProps } from "@opal/types";
 import { Hoverable } from "@opal/core";

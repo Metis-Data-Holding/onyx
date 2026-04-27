@@ -1,7 +1,7 @@
 "use client";
 
 import { use, useState, useEffect, useCallback, useMemo } from "react";
-import { cn } from "@opal/utils";
+import { cn } from "@/lib/utils";
 import { ThreeDotsLoader } from "@/components/Loading";
 import { ErrorCallout } from "@/components/ErrorCallout";
 import { toast } from "@/hooks/useToast";
@@ -24,7 +24,7 @@ import {
 } from "@/app/admin/discord-bot/lib";
 import { DiscordChannelsTable } from "@/app/admin/discord-bot/[guild-id]/DiscordChannelsTable";
 import { DiscordChannelConfig } from "@/app/admin/discord-bot/types";
-import { useAdminAgents } from "@/hooks/useAgents";
+import { useAdminPersonas } from "@/hooks/useAdminPersonas";
 import { Persona } from "@/app/admin/agents/interfaces";
 
 interface Props {
@@ -157,7 +157,7 @@ export default function Page({ params }: Props) {
     error: channelsError,
     refreshChannels,
   } = useDiscordChannels(guildId);
-  const { agents, isLoading: personasLoading } = useAdminAgents({
+  const { personas, isLoading: personasLoading } = useAdminPersonas({
     includeDefault: true,
   });
   const [isUpdating, setIsUpdating] = useState(false);
@@ -365,7 +365,7 @@ export default function Page({ params }: Props) {
                   <InputSelect.Item value="default">
                     Default Agent
                   </InputSelect.Item>
-                  {agents.map((persona) => (
+                  {personas.map((persona) => (
                     <InputSelect.Item
                       key={persona.id}
                       value={persona.id.toString()}
@@ -381,7 +381,7 @@ export default function Page({ params }: Props) {
 
         <GuildDetailContent
           guildId={guildId}
-          personas={agents}
+          personas={personas}
           localChannels={localChannels}
           onChannelUpdate={handleChannelUpdate}
           handleEnableAll={handleEnableAll}

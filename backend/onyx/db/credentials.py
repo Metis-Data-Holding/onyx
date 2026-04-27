@@ -23,6 +23,7 @@ from onyx.db.models import User__UserGroup
 from onyx.server.documents.models import CredentialBase
 from onyx.utils.logger import setup_logger
 
+
 logger = setup_logger()
 
 # The credentials for these sources are not real so

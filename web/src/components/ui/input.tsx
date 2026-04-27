@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { cn } from "@opal/utils";
+import { cn } from "@/lib/utils";
 
 interface InputProps extends React.ComponentProps<"input"> {
   removeFocusRing?: boolean;

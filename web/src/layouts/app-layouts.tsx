@@ -20,8 +20,12 @@
 
 "use client";
 
-import { ensureHrefProtocol, INTERACTIVE_SELECTOR, noProp } from "@/lib/utils";
-import { cn } from "@opal/utils";
+import {
+  cn,
+  ensureHrefProtocol,
+  INTERACTIVE_SELECTOR,
+  noProp,
+} from "@/lib/utils";
 import type { Components } from "react-markdown";
 import Text from "@/refresh-components/texts/Text";
 import { useCallback, useMemo, useRef, useState, useEffect } from "react";

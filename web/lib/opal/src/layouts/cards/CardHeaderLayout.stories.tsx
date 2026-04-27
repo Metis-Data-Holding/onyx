@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Card, ContentAction } from "@opal/layouts";
+import { Card } from "@opal/layouts";
 import { Button } from "@opal/components";
 import {
   SvgArrowExchange,
@@ -8,12 +8,20 @@ import {
   SvgSettings,
   SvgUnplug,
 } from "@opal/icons";
+import * as TooltipPrimitive from "@radix-ui/react-tooltip";
+import type { Decorator } from "@storybook/react";
+
+const withTooltipProvider: Decorator = (Story) => (
+  <TooltipPrimitive.Provider>
+    <Story />
+  </TooltipPrimitive.Provider>
+);
 
 const meta = {
   title: "Layouts/Card.Header",
   component: Card.Header,
   tags: ["autodocs"],
-
+  decorators: [withTooltipProvider],
   parameters: {
     layout: "centered",
   },
@@ -31,50 +39,34 @@ export const Default: Story = {
   render: () => (
     <div className="w-[28rem] border rounded-16">
       <Card.Header
-        headerPadding="sm"
-        children={
-          <ContentAction
-            sizePreset="main-ui"
-            variant="section"
-            icon={SvgGlobe}
-            title="Google Search"
-            description="Web search provider"
-            padding="fit"
-            rightChildren={
-              <Button prominence="tertiary" rightIcon={SvgArrowExchange}>
-                Connect
-              </Button>
-            }
-          />
+        sizePreset="main-ui"
+        variant="section"
+        icon={SvgGlobe}
+        title="Google Search"
+        description="Web search provider"
+        rightChildren={
+          <Button prominence="tertiary" rightIcon={SvgArrowExchange}>
+            Connect
+          </Button>
         }
       />
     </div>
   ),
 };
 
-export const WithBottomRightSlot: Story = {
+export const WithBothSlots: Story = {
   render: () => (
     <div className="w-[28rem] border rounded-16">
       <Card.Header
-        headerPadding="sm"
-        children={
-          <ContentAction
-            sizePreset="main-ui"
-            variant="section"
-            icon={SvgGlobe}
-            title="Google Search"
-            description="Currently the default provider."
-            padding="fit"
-            rightChildren={
-              <Button
-                variant="action"
-                prominence="tertiary"
-                icon={SvgCheckSquare}
-              >
-                Current Default
-              </Button>
-            }
-          />
+        sizePreset="main-ui"
+        variant="section"
+        icon={SvgGlobe}
+        title="Google Search"
+        description="Currently the default provider."
+        rightChildren={
+          <Button variant="action" prominence="tertiary" icon={SvgCheckSquare}>
+            Current Default
+          </Button>
         }
         bottomRightChildren={
           <>
@@ -97,21 +89,34 @@ export const WithBottomRightSlot: Story = {
   ),
 };
 
-export const NoRightAction: Story = {
+export const RightChildrenOnly: Story = {
   render: () => (
     <div className="w-[28rem] border rounded-16">
       <Card.Header
-        headerPadding="sm"
-        children={
-          <ContentAction
-            sizePreset="main-ui"
-            variant="section"
-            icon={SvgGlobe}
-            title="Section Header"
-            description="No actions on the right."
-            padding="fit"
-          />
+        sizePreset="main-ui"
+        variant="section"
+        icon={SvgGlobe}
+        title="OpenAI"
+        description="Not configured"
+        rightChildren={
+          <Button prominence="tertiary" rightIcon={SvgArrowExchange}>
+            Connect
+          </Button>
         }
+      />
+    </div>
+  ),
+};
+
+export const NoRightChildren: Story = {
+  render: () => (
+    <div className="w-[28rem] border rounded-16">
+      <Card.Header
+        sizePreset="main-ui"
+        variant="section"
+        icon={SvgGlobe}
+        title="Section Header"
+        description="No actions on the right."
       />
     </div>
   ),
@@ -121,25 +126,15 @@ export const LongContent: Story = {
   render: () => (
     <div className="w-[28rem] border rounded-16">
       <Card.Header
-        headerPadding="sm"
-        children={
-          <ContentAction
-            sizePreset="main-ui"
-            variant="section"
-            icon={SvgGlobe}
-            title="Very Long Provider Name That Should Truncate"
-            description="This is a much longer description that tests how the layout handles overflow when the content area needs to shrink."
-            padding="fit"
-            rightChildren={
-              <Button
-                variant="action"
-                prominence="tertiary"
-                icon={SvgCheckSquare}
-              >
-                Current Default
-              </Button>
-            }
-          />
+        sizePreset="main-ui"
+        variant="section"
+        icon={SvgGlobe}
+        title="Very Long Provider Name That Should Truncate"
+        description="This is a much longer description that tests how the layout handles overflow when the content area needs to shrink."
+        rightChildren={
+          <Button variant="action" prominence="tertiary" icon={SvgCheckSquare}>
+            Current Default
+          </Button>
         }
         bottomRightChildren={
           <>

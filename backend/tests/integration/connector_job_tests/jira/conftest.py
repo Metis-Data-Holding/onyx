@@ -17,6 +17,7 @@ from tests.integration.common_utils.test_models import DATestConnector
 from tests.integration.common_utils.test_models import DATestCredential
 from tests.integration.common_utils.test_models import DATestUser
 
+
 JiraTestEnvSetupTuple = tuple[
     DATestUser,
     DATestCredential,

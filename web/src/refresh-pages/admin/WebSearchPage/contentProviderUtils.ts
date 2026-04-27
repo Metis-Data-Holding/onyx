@@ -1,6 +1,3 @@
-import type { IconFunctionComponent } from "@opal/types";
-import { SvgExa, SvgFirecrawl } from "@opal/logos";
-
 export type WebContentProviderType =
   | "firecrawl"
   | "onyx_web_crawler"
@@ -9,12 +6,7 @@ export type WebContentProviderType =
 
 export const CONTENT_PROVIDER_DETAILS: Record<
   string,
-  {
-    label: string;
-    subtitle: string;
-    description: string;
-    logo?: IconFunctionComponent;
-  }
+  { label: string; subtitle: string; description: string; logoSrc?: string }
 > = {
   onyx_web_crawler: {
     label: "Onyx Web Crawler",
@@ -28,14 +20,14 @@ export const CONTENT_PROVIDER_DETAILS: Record<
     subtitle: "Leading open-source crawler.",
     description:
       "Connect Firecrawl to fetch and summarize page content from search results.",
-    logo: SvgFirecrawl,
+    logoSrc: "/firecrawl.svg",
   },
   exa: {
     label: "Exa",
     subtitle: "Exa.ai",
     description:
       "Use Exa to fetch and summarize page content from search results.",
-    logo: SvgExa,
+    logoSrc: "/Exa.svg",
   },
 };
 

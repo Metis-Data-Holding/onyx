@@ -23,8 +23,7 @@ import { ValidSources } from "@/lib/types";
 import { SWR_KEYS } from "@/lib/swr-keys";
 import { buildSimilarCredentialInfoURL } from "@/app/admin/connector/[ccPairId]/lib";
 import { FiFile, FiCheck, FiLink, FiAlertTriangle } from "react-icons/fi";
-import { truncateString } from "@/lib/utils";
-import { cn } from "@opal/utils";
+import { cn, truncateString } from "@/lib/utils";
 import { Section } from "@/layouts/general-layouts";
 
 type GmailCredentialJsonTypes = "authorized_user" | "service_account";

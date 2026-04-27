@@ -1,7 +1,5 @@
 import type { Preview } from "@storybook/react";
 import { withThemeByClassName } from "@storybook/addon-themes";
-import * as TooltipPrimitive from "@radix-ui/react-tooltip";
-import React from "react";
 import "../src/app/globals.css";
 
 const preview: Preview = {
@@ -23,12 +21,6 @@ const preview: Preview = {
       },
       defaultTheme: "light",
     }),
-    (Story) =>
-      React.createElement(
-        TooltipPrimitive.Provider,
-        null,
-        React.createElement(Story)
-      ),
   ],
 };
 

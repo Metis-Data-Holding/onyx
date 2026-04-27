@@ -1,11 +1,21 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import * as TooltipPrimitive from "@radix-ui/react-tooltip";
+import type { Decorator } from "@storybook/react";
 import { Disabled } from "@opal/core";
-import { Card, Button } from "@opal/components";
+import { Card } from "@opal/components";
+import { Button } from "@opal/components/buttons/button/components";
+
+const withTooltipProvider: Decorator = (Story) => (
+  <TooltipPrimitive.Provider>
+    <Story />
+  </TooltipPrimitive.Provider>
+);
 
 const meta: Meta<typeof Disabled> = {
   title: "opal/core/Disabled",
   component: Disabled,
   tags: ["autodocs"],
+  decorators: [withTooltipProvider],
 };
 
 export default meta;

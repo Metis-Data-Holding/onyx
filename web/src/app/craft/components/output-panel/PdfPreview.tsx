@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { cn } from "@opal/utils";
+import { cn } from "@/lib/utils";
 import Text from "@/refresh-components/texts/Text";
 import { SvgFileText } from "@opal/icons";
 import { Section } from "@/layouts/general-layouts";

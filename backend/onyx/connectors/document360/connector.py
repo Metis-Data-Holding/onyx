@@ -8,7 +8,9 @@ import requests
 
 from onyx.configs.app_configs import INDEX_BATCH_SIZE
 from onyx.configs.constants import DocumentSource
-from onyx.connectors.cross_connector_utils.rate_limit_wrapper import rate_limit_builder
+from onyx.connectors.cross_connector_utils.rate_limit_wrapper import (
+    rate_limit_builder,
+)
 from onyx.connectors.document360.utils import flatten_child_categories
 from onyx.connectors.interfaces import GenerateDocumentsOutput
 from onyx.connectors.interfaces import LoadConnector
@@ -189,8 +191,8 @@ class Document360Connector(LoadConnector, PollConnector):
 
 
 if __name__ == "__main__":
-    import os
     import time
+    import os
 
     document360_connector = Document360Connector(os.environ["DOCUMENT360_WORKSPACE"])
     document360_connector.load_credentials(

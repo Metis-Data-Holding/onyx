@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { cn } from "@opal/utils";
+import { cn } from "@/lib/utils";
 
 interface DiffViewProps {
   oldContent: string;

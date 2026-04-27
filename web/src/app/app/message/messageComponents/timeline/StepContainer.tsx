@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { cn } from "@opal/utils";
+import { cn } from "@/lib/utils";
 import { IconProps } from "@opal/types";
 import { TimelineRow } from "@/app/app/message/messageComponents/timeline/primitives/TimelineRow";
 import {

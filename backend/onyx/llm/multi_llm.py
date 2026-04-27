@@ -438,10 +438,8 @@ class LitellmLLM(LLM):
         client: "HTTPHandler | None" = None,
     ) -> Union["ModelResponse", "CustomStreamWrapper"]:
         # Lazy loading to avoid memory bloat for non-inference flows
-        from litellm.exceptions import RateLimitError
-        from litellm.exceptions import Timeout
-
         from onyx.llm.litellm_singleton import litellm
+        from litellm.exceptions import Timeout, RateLimitError
 
         #########################
         # Flags that modify the final arguments
@@ -752,8 +750,8 @@ class LitellmLLM(LLM):
             # only held during connection setup (not the full inference).
             # The chunks are then collected outside the lock and reassembled
             # into a single ModelResponse via stream_chunk_builder.
-            from litellm import CustomStreamWrapper as LiteLLMCustomStreamWrapper
             from litellm import stream_chunk_builder
+            from litellm import CustomStreamWrapper as LiteLLMCustomStreamWrapper
 
             stream_response = cast(
                 LiteLLMCustomStreamWrapper,

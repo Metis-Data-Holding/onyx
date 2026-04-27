@@ -78,8 +78,10 @@ class ModelResponse(BaseModel):
 
 
 if TYPE_CHECKING:
-    from litellm.types.utils import ModelResponse as LiteLLMModelResponse
-    from litellm.types.utils import ModelResponseStream as LiteLLMModelResponseStream
+    from litellm.types.utils import (
+        ModelResponse as LiteLLMModelResponse,
+        ModelResponseStream as LiteLLMModelResponseStream,
+    )
 
 
 def _parse_function_call(

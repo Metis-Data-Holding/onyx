@@ -1,4 +1,7 @@
-import { FiCircle, FiList, FiTool } from "react-icons/fi";
+import { JSX } from "react";
+import { FiCircle, FiList, FiTool, FiXCircle } from "react-icons/fi";
+import { BrainIcon } from "@/components/icons/icons";
+
 import {
   Packet,
   PacketType,
@@ -14,8 +17,6 @@ import {
   SvgUser,
   SvgCircle,
   SvgBookOpen,
-  SvgSlowTime,
-  SvgXCircle,
 } from "@opal/icons";
 
 /**
@@ -56,8 +57,8 @@ export function isToolComplete(packets: Packet[]): boolean {
 /**
  * Get an error icon for failed tools
  */
-export function getToolErrorIcon(): React.ReactNode {
-  return <SvgXCircle className="w-3.5 h-3.5 text-error" />;
+export function getToolErrorIcon(): JSX.Element {
+  return <FiXCircle className="w-3.5 h-3.5 text-error" />;
 }
 
 export function getToolKey(turn_index: number, tab_index: number): string {
@@ -110,7 +111,7 @@ export function getToolName(packets: Packet[]): string {
   }
 }
 
-export function getToolIcon(packets: Packet[]): React.ReactNode {
+export function getToolIcon(packets: Packet[]): JSX.Element {
   const firstPacket = packets[0];
   if (!firstPacket) return <FiCircle className="w-3.5 h-3.5" />;
 
@@ -138,7 +139,7 @@ export function getToolIcon(packets: Packet[]): React.ReactNode {
     case PacketType.RESEARCH_AGENT_START:
       return <SvgUser className="w-3.5 h-3.5" />;
     case PacketType.REASONING_START:
-      return <SvgSlowTime className="w-3.5 h-3.5" />;
+      return <BrainIcon className="w-3.5 h-3.5" />;
     case PacketType.MEMORY_TOOL_START:
     case PacketType.MEMORY_TOOL_NO_ACCESS:
       return <SvgBookOpen className="w-3.5 h-3.5" />;

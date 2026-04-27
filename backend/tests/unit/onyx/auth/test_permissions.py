@@ -14,6 +14,7 @@ from onyx.db.enums import Permission
 from onyx.error_handling.error_codes import OnyxErrorCode
 from onyx.error_handling.exceptions import OnyxError
 
+
 # ---------------------------------------------------------------------------
 # resolve_effective_permissions
 # ---------------------------------------------------------------------------

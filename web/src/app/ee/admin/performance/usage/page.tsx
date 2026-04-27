@@ -8,7 +8,7 @@ import { PersonaMessagesChart } from "@/app/ee/admin/performance/usage/PersonaMe
 import { useTimeRange } from "@/app/ee/admin/performance/lib";
 import UsageReports from "@/app/ee/admin/performance/usage/UsageReports";
 import { Divider } from "@opal/components";
-import { useAdminAgents } from "@/hooks/useAgents";
+import { useAdminPersonas } from "@/hooks/useAdminPersonas";
 import { ADMIN_ROUTES } from "@/lib/admin-routes";
 import * as SettingsLayouts from "@/layouts/settings-layouts";
 
@@ -16,11 +16,11 @@ const route = ADMIN_ROUTES.USAGE;
 
 export default function AnalyticsPage() {
   const [timeRange, setTimeRange] = useTimeRange();
-  const { agents } = useAdminAgents();
+  const { personas } = useAdminPersonas();
 
   return (
     <SettingsLayouts.Root>
-      <SettingsLayouts.Header icon={route.icon} title={route.title} divider />
+      <SettingsLayouts.Header icon={route.icon} title={route.title} separator />
       <SettingsLayouts.Body>
         <AdminDateRangeSelector
           value={timeRange}
@@ -30,7 +30,7 @@ export default function AnalyticsPage() {
         <FeedbackChart timeRange={timeRange} />
         <OnyxBotChart timeRange={timeRange} />
         <PersonaMessagesChart
-          availablePersonas={agents}
+          availablePersonas={personas}
           timeRange={timeRange}
         />
         <Divider />

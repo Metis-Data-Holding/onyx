@@ -1,12 +1,3 @@
-import type { IconFunctionComponent } from "@opal/types";
-import {
-  SvgBrave,
-  SvgExa,
-  SvgGoogle,
-  SvgSearxng,
-  SvgSerper,
-} from "@opal/logos";
-
 export type WebSearchProviderType =
   | "google_pse"
   | "serper"
@@ -20,7 +11,7 @@ export const SEARCH_PROVIDER_DETAILS: Record<
     label: string;
     subtitle: string;
     helper: string;
-    logo?: IconFunctionComponent;
+    logoSrc?: string;
     apiKeyUrl?: string;
   }
 > = {
@@ -28,21 +19,21 @@ export const SEARCH_PROVIDER_DETAILS: Record<
     label: "Exa",
     subtitle: "Exa.ai",
     helper: "Connect to Exa to set up web search.",
-    logo: SvgExa,
+    logoSrc: "/Exa.svg",
     apiKeyUrl: "https://dashboard.exa.ai/api-keys",
   },
   serper: {
     label: "Serper",
     subtitle: "Serper.dev",
     helper: "Connect to Serper to set up web search.",
-    logo: SvgSerper,
+    logoSrc: "/Serper.svg",
     apiKeyUrl: "https://serper.dev/api-key",
   },
   brave: {
     label: "Brave",
     subtitle: "Brave Search API",
     helper: "Connect to Brave Search API to set up web search.",
-    logo: SvgBrave,
+    logoSrc: "/Brave.svg",
     apiKeyUrl:
       "https://api-dashboard.search.brave.com/app/documentation/web-search/get-started",
   },
@@ -50,14 +41,14 @@ export const SEARCH_PROVIDER_DETAILS: Record<
     label: "Google PSE",
     subtitle: "Google",
     helper: "Connect to Google PSE to set up web search.",
-    logo: SvgGoogle,
+    logoSrc: "/Google.svg",
     apiKeyUrl: "https://programmablesearchengine.google.com/controlpanel/all",
   },
   searxng: {
     label: "SearXNG",
     subtitle: "SearXNG",
     helper: "Connect to SearXNG to set up web search.",
-    logo: SvgSearxng,
+    logoSrc: "/SearXNG.svg",
   },
 };
 

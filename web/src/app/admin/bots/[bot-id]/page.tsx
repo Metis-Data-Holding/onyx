@@ -82,7 +82,7 @@ export default function Page({
         icon={SvgSlack}
         title="Edit Slack Bot"
         backButton
-        divider
+        separator
       />
       <SettingsLayouts.Body>
         <SlackBotEditContent botId={unwrappedParams["bot-id"]} />

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { cn } from "@opal/utils";
+import { cn } from "@/lib/utils";
 
 interface ToolItemSkeletonProps {
   className?: string;

@@ -59,7 +59,7 @@ function EditSlackChannelConfigContent({ id }: { id: string }) {
       <SettingsLayouts.Header
         icon={SvgSlack}
         title={title}
-        divider
+        separator
         backButton
       />
       <SettingsLayouts.Body>

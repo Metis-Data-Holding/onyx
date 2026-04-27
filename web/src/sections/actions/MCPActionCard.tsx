@@ -26,7 +26,7 @@ import SimpleLoader from "@/refresh-components/loaders/SimpleLoader";
 import { Button } from "@opal/components";
 import Text from "@/refresh-components/texts/Text";
 import { timeAgo } from "@/lib/time";
-import { cn } from "@opal/utils";
+import { cn } from "@/lib/utils";
 import Modal from "@/refresh-components/layouts/ConfirmationModalLayout";
 
 export interface MCPActionCardProps {

@@ -11,6 +11,7 @@ from onyx.connectors.confluence.onyx_confluence import (
 from onyx.connectors.confluence.onyx_confluence import OnyxConfluence
 from onyx.utils.logger import setup_logger
 
+
 logger = setup_logger()
 
 

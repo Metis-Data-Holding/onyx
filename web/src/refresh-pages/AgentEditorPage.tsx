@@ -279,15 +279,20 @@ function OpenApiToolCard({ tool }: OpenApiToolCardProps) {
   const toolFieldName = `openapi_tool_${tool.id}`;
 
   return (
-    <Card border="solid" rounding="lg">
-      <InputHorizontal
-        icon={SvgActions}
-        title={tool.display_name || tool.name}
-        description={tool.description}
-        withLabel={toolFieldName}
-      >
-        <SwitchField name={toolFieldName} />
-      </InputHorizontal>
+    <Card border="solid" rounding="lg" padding="sm">
+      <CardLayout.Header
+        headerChildren={
+          <ContentAction
+            icon={SvgActions}
+            title={tool.display_name || tool.name}
+            description={tool.description}
+            sizePreset="main-ui"
+            variant="section"
+            padding="fit"
+          />
+        }
+        topRightChildren={<SwitchField name={toolFieldName} />}
+      />
     </Card>
   );
 }
@@ -332,22 +337,26 @@ function MCPServerCard({
     );
   } else if (hasTools) {
     cardContent = (
-      <GeneralLayouts.Section gap={0.5} padding={0.5}>
+      <div className="flex flex-col gap-2 p-2">
         {filteredTools.map((tool) => {
           const toolDisabled =
             !tool.isAvailable ||
             !getFieldMeta<boolean>(`${serverFieldName}.enabled`).value;
           return (
             <Disabled key={tool.id} disabled={toolDisabled}>
-              <Card border="solid" rounding="md" padding="sm">
-                <ContentAction
-                  icon={tool.icon ?? SvgSliders}
-                  title={tool.name}
-                  description={tool.description}
-                  sizePreset="main-ui"
-                  variant="section"
-                  padding="fit"
-                  rightChildren={
+              <Card border="solid" rounding="lg" padding="sm">
+                <CardLayout.Header
+                  headerChildren={
+                    <ContentAction
+                      icon={tool.icon ?? SvgSliders}
+                      title={tool.name}
+                      description={tool.description}
+                      sizePreset="main-ui"
+                      variant="section"
+                      padding="fit"
+                    />
+                  }
+                  topRightChildren={
                     <SwitchField
                       name={`${serverFieldName}.tool_${tool.id}`}
                       disabled={!isServerEnabled}
@@ -358,7 +367,7 @@ function MCPServerCard({
             </Disabled>
           );
         })}
-      </GeneralLayouts.Section>
+      </div>
     );
   }
 
@@ -372,28 +381,7 @@ function MCPServerCard({
       expandedContent={cardContent}
     >
       <CardLayout.Header
-        bottomChildren={
-          <GeneralLayouts.Section flexDirection="row" gap={0.5}>
-            <InputTypeIn
-              placeholder="Search tools..."
-              variant="internal"
-              leftSearchIcon
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-            {enabledTools.length > 0 && (
-              <Button
-                prominence="internal"
-                rightIcon={isFolded ? SvgExpand : SvgFold}
-                onClick={() => setIsFolded((prev) => !prev)}
-              >
-                {isFolded ? "Expand" : "Fold"}
-              </Button>
-            )}
-          </GeneralLayouts.Section>
-        }
-      >
-        <div className="p-2">
+        headerChildren={
           <ContentAction
             icon={getActionIcon(server.server_url, server.name)}
             title={server.name}
@@ -427,8 +415,28 @@ function MCPServerCard({
               </GeneralLayouts.Section>
             }
           />
-        </div>
-      </CardLayout.Header>
+        }
+        bottomChildren={
+          <GeneralLayouts.Section flexDirection="row" gap={0.5}>
+            <InputTypeIn
+              placeholder="Search tools..."
+              variant="internal"
+              leftSearchIcon
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+            {enabledTools.length > 0 && (
+              <Button
+                prominence="internal"
+                rightIcon={isFolded ? SvgExpand : SvgFold}
+                onClick={() => setIsFolded((prev) => !prev)}
+              >
+                {isFolded ? "Expand" : "Fold"}
+              </Button>
+            )}
+          </GeneralLayouts.Section>
+        }
+      />
     </Card>
   );
 }
@@ -1282,7 +1290,7 @@ export default function AgentEditorPage({
                         </div>
                       }
                       backButton
-                      divider
+                      separator
                     />
 
                     {/* Agent Form Content */}
@@ -1479,7 +1487,7 @@ export default function AgentEditorPage({
 
                             {/* Tools */}
                             <>
-                              {/* render the divider if there is at least one mcp-server or open-api-tool */}
+                              {/* render the separator if there is at least one mcp-server or open-api-tool */}
                               {(mcpServers.length > 0 ||
                                 openApiTools.length > 0) && (
                                 <Divider

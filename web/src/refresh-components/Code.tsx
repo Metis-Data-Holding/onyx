@@ -1,4 +1,4 @@
-import type { WithoutStyles } from "@opal/types";
+import { WithoutStyles } from "@/types";
 import CopyIconButton from "@/refresh-components/buttons/CopyIconButton";
 
 interface CodeProps extends WithoutStyles<React.HTMLAttributes<HTMLElement>> {

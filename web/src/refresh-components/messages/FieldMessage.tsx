@@ -1,4 +1,4 @@
-import { cn } from "@opal/utils";
+import { cn } from "@/lib/utils";
 import React from "react";
 import Text from "../texts/Text";
 import {

@@ -14,7 +14,12 @@ import {
   rerankingModels,
 } from "./interfaces";
 import { FiExternalLink } from "react-icons/fi";
-import { SvgAws, SvgCohere, SvgLitellm, SvgMixedbread } from "@opal/logos";
+import {
+  AmazonIcon,
+  CohereIcon,
+  LiteLLMIcon,
+  MixedBreadIcon,
+} from "@/components/icons/icons";
 import Modal from "@/refresh-components/Modal";
 import { Button } from "@opal/components";
 import { TextFormField } from "@/components/Field";
@@ -276,15 +281,15 @@ const RerankingDetailsForm = forwardRef<
                           <div className="flex items-center">
                             {card.rerank_provider_type ===
                             RerankerProvider.LITELLM ? (
-                              <SvgLitellm size={24} className="mr-2" />
+                              <LiteLLMIcon size={24} className="mr-2" />
                             ) : card.rerank_provider_type ===
                               RerankerProvider.COHERE ? (
-                              <SvgCohere size={24} className="mr-2" />
+                              <CohereIcon size={24} className="mr-2" />
                             ) : card.rerank_provider_type ===
                               RerankerProvider.BEDROCK ? (
-                              <SvgAws size={24} className="mr-2" />
+                              <AmazonIcon size={24} className="mr-2" />
                             ) : (
-                              <SvgMixedbread size={24} className="mr-2" />
+                              <MixedBreadIcon size={24} className="mr-2" />
                             )}
                             <h3 className="font-bold text-lg">
                               {card.displayName}

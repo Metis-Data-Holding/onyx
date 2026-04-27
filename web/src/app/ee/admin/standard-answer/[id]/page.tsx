@@ -85,7 +85,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
         icon={route.icon}
         title="Edit Standard Answer"
         backButton
-        divider
+        separator
       />
       <SettingsLayouts.Body>
         <Main id={params.id} />

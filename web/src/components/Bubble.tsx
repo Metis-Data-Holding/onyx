@@ -1,5 +1,5 @@
 import { JSX } from "react";
-import { Checkbox } from "@opal/components";
+import Checkbox from "@/refresh-components/inputs/Checkbox";
 
 export function Bubble({
   isSelected,

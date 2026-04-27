@@ -2,6 +2,7 @@ from datetime import datetime
 
 from onyx.configs.constants import OnyxCeleryTask
 
+
 QUERY_HISTORY_TASK_NAME_PREFIX = OnyxCeleryTask.EXPORT_QUERY_HISTORY_TASK
 
 

@@ -7,6 +7,7 @@ import time
 from onyx.redis.redis_pool import get_redis_client
 from onyx.utils.logger import setup_logger
 
+
 logger = setup_logger()
 
 MAX_AGE_SECONDS = 900  # how old the heartbeat can be

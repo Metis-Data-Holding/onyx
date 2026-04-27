@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ensureHrefProtocol, noProp } from "@/lib/utils";
-import { cn } from "@opal/utils";
+import { cn, ensureHrefProtocol, noProp } from "@/lib/utils";
 import type { Components } from "react-markdown";
 import Text from "@/refresh-components/texts/Text";
 import Popover from "@/refresh-components/Popover";

@@ -14,6 +14,7 @@ from onyx.utils.postgres_sanitization import sanitize_hierarchy_node_for_postgre
 from onyx.utils.postgres_sanitization import sanitize_json_like
 from onyx.utils.postgres_sanitization import sanitize_string
 
+
 # ---- sanitize_string tests ----
 
 

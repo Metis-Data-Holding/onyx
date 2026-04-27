@@ -5,7 +5,7 @@ import { FullImageModal } from "@/app/app/components/files/images/FullImageModal
 import { buildImgUrl } from "@/app/app/components/files/images/utils";
 import { Button } from "@opal/components";
 import { Hoverable } from "@opal/core";
-import { cn } from "@opal/utils";
+import { cn } from "@/lib/utils";
 
 const DEFAULT_SHAPE: ImageShape = "square";
 

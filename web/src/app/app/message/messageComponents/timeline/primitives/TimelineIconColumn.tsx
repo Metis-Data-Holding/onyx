@@ -1,5 +1,5 @@
 import React from "react";
-import { cn } from "@opal/utils";
+import { cn } from "@/lib/utils";
 
 /**
  * TimelineRailVariant controls whether a row shows the rail or only reserves width.

@@ -572,8 +572,7 @@ class OpenAIVoiceProvider(VoiceProviderInterface):
 
     async def validate_credentials(self) -> None:
         """Validate OpenAI API key by listing models."""
-        from openai import AuthenticationError
-        from openai import PermissionDeniedError
+        from openai import AuthenticationError, PermissionDeniedError
 
         client = self._get_client()
         try:

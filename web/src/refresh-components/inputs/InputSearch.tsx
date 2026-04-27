@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { cn } from "@opal/utils";
+import { cn } from "@/lib/utils";
 import InputTypeIn, {
   InputTypeInProps,
 } from "@/refresh-components/inputs/InputTypeIn";

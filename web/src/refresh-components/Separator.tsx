@@ -2,7 +2,7 @@
 
 import React from "react";
 import * as SeparatorPrimitive from "@radix-ui/react-separator";
-import { cn } from "@opal/utils";
+import { cn } from "@/lib/utils";
 
 export interface SeparatorProps
   extends React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root> {
@@ -21,10 +21,10 @@ export interface SeparatorProps
  *
  * @example
  * ```tsx
- * // Horizontal divider (default)
+ * // Horizontal separator (default)
  * <Separator />
  *
- * // Vertical divider
+ * // Vertical separator
  * <Separator orientation="vertical" />
  *
  * // With custom className

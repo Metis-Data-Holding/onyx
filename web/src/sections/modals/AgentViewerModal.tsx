@@ -7,7 +7,12 @@ import { FullPersona } from "@/app/admin/agents/interfaces";
 import { useModal } from "@/refresh-components/contexts/ModalContext";
 import Modal from "@/refresh-components/Modal";
 import { Section } from "@/layouts/general-layouts";
-import { Content, ContentAction, InputHorizontal } from "@opal/layouts";
+import {
+  Card as CardLayout,
+  Content,
+  ContentAction,
+  InputHorizontal,
+} from "@opal/layouts";
 import Text from "@/refresh-components/texts/Text";
 import AgentAvatar from "@/refresh-components/avatars/AgentAvatar";
 import { Card, Divider } from "@opal/components";
@@ -75,14 +80,18 @@ function ViewerMCPServerCard({ server, tools }: ViewerMCPServerCardProps) {
         ) : undefined
       }
     >
-      <ContentAction
-        icon={serverIcon}
-        title={server.name}
-        description={server.description}
-        sizePreset="main-ui"
-        variant="section"
-        padding="lg"
-        rightChildren={
+      <CardLayout.Header
+        headerChildren={
+          <ContentAction
+            icon={serverIcon}
+            title={server.name}
+            description={server.description}
+            sizePreset="main-ui"
+            variant="section"
+            padding="fit"
+          />
+        }
+        topRightChildren={
           <Button
             prominence="internal"
             rightIcon={expanded ? SvgFold : SvgExpand}
@@ -102,13 +111,17 @@ function ViewerMCPServerCard({ server, tools }: ViewerMCPServerCardProps) {
  */
 function ViewerOpenApiToolCard({ tool }: { tool: ToolSnapshot }) {
   return (
-    <Card border="solid" rounding="lg" padding="md">
-      <Content
-        icon={SvgActions}
-        title={tool.display_name}
-        description={tool.description}
-        sizePreset="main-ui"
-        variant="section"
+    <Card border="solid" rounding="lg" padding="sm">
+      <CardLayout.Header
+        headerChildren={
+          <Content
+            icon={SvgActions}
+            title={tool.display_name}
+            description={tool.description}
+            sizePreset="main-ui"
+            variant="section"
+          />
+        }
       />
     </Card>
   );
@@ -368,6 +381,7 @@ export default function AgentViewerModal({ agent }: AgentViewerModalProps) {
                 <InputHorizontal
                   title="Overwrite System Prompts"
                   description='Remove the base system prompt which includes useful instructions (e.g. "You can use Markdown tables"). This may affect response quality.'
+                  withLabel
                 >
                   <Switch disabled checked={agent.replace_base_system_prompt} />
                 </InputHorizontal>

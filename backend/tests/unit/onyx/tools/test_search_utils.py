@@ -9,6 +9,7 @@ from onyx.tools.tool_implementations.search.search_utils import (
     weighted_reciprocal_rank_fusion,
 )
 
+
 # =============================================================================
 # Test Data Structures
 # =============================================================================

@@ -17,6 +17,7 @@ from onyx.connectors.models import Document
 from onyx.connectors.models import HierarchyNode
 from onyx.utils.logger import setup_logger
 
+
 logger = setup_logger()
 
 

@@ -251,7 +251,7 @@ export default function Page() {
         rightChildren={
           <Button href="/admin/indexing/status">See Connectors</Button>
         }
-        divider
+        separator
       />
       <SettingsLayouts.Body>
         <InputTypeIn

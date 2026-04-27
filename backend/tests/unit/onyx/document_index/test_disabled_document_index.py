@@ -61,8 +61,7 @@ def test_register_multitenant_indices_raises() -> None:
 
 
 def test_index_raises(disabled_index: DisabledDocumentIndex) -> None:
-    from dataclasses import dataclass
-    from dataclasses import field
+    from dataclasses import dataclass, field
 
     # We only need a stub — the method raises before inspecting arguments.
     @dataclass

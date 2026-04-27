@@ -4,6 +4,7 @@ from shared_configs.enums import EmbeddingProvider
 from shared_configs.enums import EmbedTextType
 from shared_configs.enums import RerankerProvider
 
+
 Embedding = list[float]
 
 

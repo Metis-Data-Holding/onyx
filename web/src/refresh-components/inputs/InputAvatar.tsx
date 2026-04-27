@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
-import { cn } from "@opal/utils";
+import { cn } from "@/lib/utils";
 import { wrapperClasses } from "@/refresh-components/inputs/styles";
 
 const InputAvatar = React.forwardRef<

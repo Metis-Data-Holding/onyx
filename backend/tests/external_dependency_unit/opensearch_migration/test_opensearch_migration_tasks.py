@@ -74,6 +74,7 @@ from shared_configs.configs import MULTI_TENANT
 from shared_configs.contextvars import get_current_tenant_id
 from tests.external_dependency_unit.full_setup import ensure_full_deployment_setup
 
+
 CHUNK_COUNT = 5
 
 

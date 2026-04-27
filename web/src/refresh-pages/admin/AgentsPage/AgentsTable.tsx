@@ -10,16 +10,13 @@ import InputTypeIn from "@/refresh-components/inputs/InputTypeIn";
 import type { MinimalUserSnapshot } from "@/lib/types";
 import AgentAvatar from "@/refresh-components/avatars/AgentAvatar";
 import type { MinimalPersonaSnapshot } from "@/app/admin/agents/interfaces";
-import { useAdminAgents } from "@/hooks/useAgents";
+import { useAdminPersonas } from "@/hooks/useAdminPersonas";
 import { toast } from "@/hooks/useToast";
 import AgentRowActions from "@/refresh-pages/admin/AgentsPage/AgentRowActions";
 import { updateAgentDisplayPriorities } from "@/refresh-pages/admin/AgentsPage/svc";
 import type { AgentRow } from "@/refresh-pages/admin/AgentsPage/interfaces";
 import type { Persona } from "@/app/admin/agents/interfaces";
 import { SvgUser } from "@opal/icons";
-import { DEFAULT_PAGE_SIZE } from "@/lib/constants";
-import { Section } from "@/layouts/general-layouts";
-import { useAgentsFilters } from "@/sections/agents/AgentsFilters";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -38,7 +35,6 @@ function toAgentRow(persona: Persona): AgentRow {
     owner: persona.owner,
     groups: persona.groups,
     users: persona.users,
-    tools: persona.tools,
     uploaded_image_id: persona.uploaded_image_id,
     icon_name: persona.icon_name,
   };
@@ -137,30 +133,24 @@ function buildColumns(onMutate: () => void) {
 // Component
 // ---------------------------------------------------------------------------
 
+const PAGE_SIZE = 10;
+
 export default function AgentsTable() {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const { agents, isLoading, refresh } = useAdminAgents();
+  const { personas, isLoading, error, refresh } = useAdminPersonas();
 
   const columns = useMemo(() => buildColumns(refresh), [refresh]);
 
-  const nonBuiltinAgents = useMemo(
-    () => agents.filter((p) => !p.builtin_persona),
-    [agents]
-  );
-
-  const { filtered: filteredAgents, filterBar } =
-    useAgentsFilters(nonBuiltinAgents);
-
   const agentRows: AgentRow[] = useMemo(
-    () => filteredAgents.map(toAgentRow),
-    [filteredAgents]
+    () => personas.filter((p) => !p.builtin_persona).map(toAgentRow),
+    [personas]
   );
 
-  async function handleReorder(
+  const handleReorder = async (
     _orderedIds: string[],
     changedOrders: Record<string, number>
-  ) {
+  ) => {
     try {
       await updateAgentDisplayPriorities(changedOrders);
       refresh();
@@ -170,7 +160,7 @@ export default function AgentsTable() {
       );
       refresh();
     }
-  }
+  };
 
   if (isLoading) {
     return (
@@ -180,24 +170,28 @@ export default function AgentsTable() {
     );
   }
 
+  if (error) {
+    console.error("Failed to load agents:", error);
+    return (
+      <Text as="p" secondaryBody text03>
+        Failed to load agents. Please try refreshing the page.
+      </Text>
+    );
+  }
+
   return (
-    <div className="flex flex-col">
-      <Section gap={0.5}>
-        <InputTypeIn
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search agents..."
-          leftSearchIcon
-        />
-        <Section gap={0.25} flexDirection="row" justifyContent="start">
-          {filterBar}
-        </Section>
-      </Section>
+    <div className="flex flex-col gap-3">
+      <InputTypeIn
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="Search agents..."
+        leftSearchIcon
+      />
       <Table
         data={agentRows}
         columns={columns}
         getRowId={(row) => String(row.id)}
-        pageSize={DEFAULT_PAGE_SIZE}
+        pageSize={PAGE_SIZE}
         searchTerm={searchTerm}
         draggable={{
           onReorder: handleReorder,

@@ -1,18 +1,14 @@
 "use client";
 
 import "@opal/layouts/inputs/styles.css";
-import type {
-  IconFunctionComponent,
-  RichStr,
-  WithoutStyles,
-} from "@opal/types";
+import type { RichStr, WithoutStyles } from "@opal/types";
+import type { TagProps } from "@opal/components/tag/components";
 import { Text, Divider } from "@opal/components";
-import type { TagProps } from "@opal/components";
 import { SvgXOctagon, SvgAlertCircle } from "@opal/icons";
 import { useContext } from "react";
 import { useField, FormikContext } from "formik";
 import { Section } from "@/layouts/general-layouts";
-import { Content, ContentAction } from "@opal/layouts";
+import { Content } from "@opal/layouts";
 
 // ---------------------------------------------------------------------------
 // Label
@@ -125,8 +121,6 @@ function Vertical({
 export interface HorizontalProps extends InputLayoutProps {
   /** Align input to the center (middle) of the label/description. */
   center?: boolean;
-  /** Optional icon rendered beside the title. */
-  icon?: IconFunctionComponent;
 }
 
 function Horizontal({
@@ -135,7 +129,6 @@ function Horizontal({
   ref,
   children,
   center,
-  icon,
   title,
   tag,
   description,
@@ -146,19 +139,24 @@ function Horizontal({
 
   const content = (
     <Section ref={ref} gap={0.25} alignItems="start">
-      <ContentAction
-        icon={icon}
-        title={title}
-        description={description}
-        suffix={suffix}
-        tag={tag}
-        sizePreset="main-ui"
-        variant="section"
-        width="full"
-        padding="fit"
-        center={center}
-        rightChildren={children}
-      />
+      <Section
+        flexDirection="row"
+        justifyContent="between"
+        alignItems={center ? "center" : "start"}
+      >
+        <div className="flex flex-col flex-1 min-w-0 self-stretch">
+          <Content
+            title={title}
+            description={description}
+            suffix={suffix}
+            tag={tag}
+            sizePreset="main-ui"
+            variant="section"
+            width="full"
+          />
+        </div>
+        <div className="flex flex-col items-end">{children}</div>
+      </Section>
       {fieldName && <FormikInputError name={fieldName} />}
     </Section>
   );

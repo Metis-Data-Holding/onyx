@@ -6,6 +6,7 @@ from tests.integration.common_utils.reset import reset_all
 from tests.integration.common_utils.test_models import DATestLLMProvider
 from tests.integration.common_utils.test_models import DATestUser
 
+
 MESSAGE = "Hi"
 
 

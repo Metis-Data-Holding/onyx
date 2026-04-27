@@ -25,25 +25,19 @@ export const logout = async (): Promise<Response> => {
 
 export const basicLogin = async (
   email: string,
-  password: string,
-  captchaToken?: string
+  password: string
 ): Promise<Response> => {
   const params = new URLSearchParams([
     ["username", email],
     ["password", password],
   ]);
 
-  const headers: Record<string, string> = {
-    "Content-Type": "application/x-www-form-urlencoded",
-  };
-  if (captchaToken) {
-    headers["X-Captcha-Token"] = captchaToken;
-  }
-
   const response = await fetch("/api/auth/login", {
     method: "POST",
     credentials: "include",
-    headers,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
     body: params,
   });
   return response;

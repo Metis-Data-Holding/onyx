@@ -107,11 +107,9 @@ def _add_user_filters(
     - if we are not editing, we return all Personas directly connected to the user
     """
 
-    # Anonymous users only see public, listed Personas
+    # Anonymous users only see public Personas
     if user.is_anonymous:
-        where_clause = (Persona.is_public == True) & (  # noqa: E712
-            Persona.is_listed == True  # noqa: E712
-        )
+        where_clause = Persona.is_public == True  # noqa: E712
         return stmt.where(where_clause)
 
     # If curator ownership restriction is enabled, curators can only access their own assistants
@@ -136,21 +134,14 @@ def _add_user_filters(
             .correlate(Persona)
         )
     else:
-        listed = Persona.is_listed == True  # noqa: E712
-
-        # Group membership — only listed agents
-        where_clause &= listed
-
-        # Public agents — must be listed
-        public_condition = (Persona.is_public == True) & listed  # noqa: E712
-
-        # Directly shared — only listed agents
-        shared_condition = (Persona__User.user_id == user.id) & listed
+        # Group the public persona conditions
+        public_condition = (Persona.is_public == True) & (  # noqa: E712
+            Persona.is_listed == True  # noqa: E712
+        )
 
         where_clause |= public_condition
-        where_clause |= shared_condition
+        where_clause |= Persona__User.user_id == user.id
 
-    # Owner always sees their own agents (regardless of is_listed)
     where_clause |= Persona.user_id == user.id
 
     return stmt.where(where_clause)

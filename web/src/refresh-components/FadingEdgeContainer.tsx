@@ -1,5 +1,5 @@
 import React from "react";
-import { cn } from "@opal/utils";
+import { cn } from "@/lib/utils";
 
 interface FadingEdgeContainerProps {
   /** Classes applied to the inner scrollable container */

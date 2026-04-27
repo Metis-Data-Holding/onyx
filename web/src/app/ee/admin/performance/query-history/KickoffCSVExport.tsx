@@ -15,7 +15,7 @@ import {
   SpinnerStatus,
   StartQueryHistoryExportResponse,
 } from "./types";
-import { cn } from "@opal/utils";
+import { cn } from "@/lib/utils";
 import { SvgLoader, SvgPlayCircle } from "@opal/icons";
 export default function KickoffCSVExport({
   dateRange,

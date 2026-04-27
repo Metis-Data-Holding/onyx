@@ -91,8 +91,7 @@ import {
   shift,
   size,
 } from "@floating-ui/react-dom";
-import { noProp } from "@/lib/utils";
-import { cn } from "@opal/utils";
+import { cn, noProp } from "@/lib/utils";
 import InputTypeIn from "../InputTypeIn";
 import { FieldContext } from "../../form/FieldContext";
 import { Button } from "@opal/components";
@@ -114,7 +113,7 @@ import { ComboBoxDropdown } from "./components/ComboBoxDropdown";
 // Types
 import { InputComboBoxProps, ComboBoxOption } from "./types";
 import { SvgChevronDown, SvgChevronUp } from "@opal/icons";
-import type { WithoutStyles } from "@opal/types";
+import { WithoutStyles } from "@/types";
 
 const InputComboBox = ({
   value,

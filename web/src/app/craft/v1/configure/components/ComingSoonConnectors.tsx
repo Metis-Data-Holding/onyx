@@ -8,8 +8,13 @@ import { Divider } from "@opal/components";
 import { ValidSources } from "@/lib/types";
 import { getSourceMetadata } from "@/lib/sources";
 import RequestConnectorModal from "@/app/craft/v1/configure/components/RequestConnectorModal";
-import { BoxIcon, TrelloIcon, ServiceNowIcon } from "@/components/icons/icons";
-import { SvgOnedrive, SvgOutlook } from "@opal/logos";
+import {
+  OutlookIcon,
+  OneDriveIcon,
+  BoxIcon,
+  TrelloIcon,
+  ServiceNowIcon,
+} from "@/components/icons/icons";
 
 // Coming soon connectors - organized by ecosystem
 const COMING_SOON_CONNECTORS: ValidSources[] = [
@@ -97,7 +102,7 @@ export default function ComingSoonConnectors() {
                 <Content
                   icon={
                     type === ValidSources.Imap
-                      ? SvgOutlook
+                      ? OutlookIcon
                       : sourceMetadata.icon
                   }
                   title={displayName}
@@ -115,7 +120,7 @@ export default function ComingSoonConnectors() {
               <div key="onedrive" className="opacity-60">
                 <Card variant="secondary">
                   <Content
-                    icon={SvgOnedrive}
+                    icon={OneDriveIcon}
                     title="OneDrive"
                     sizePreset="main-ui"
                     variant="body"

@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from "react";
 
-import { cn } from "@opal/utils";
+import { cn } from "@/lib/utils";
 
 const fonts = {
   // Heading

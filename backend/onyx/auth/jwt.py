@@ -15,6 +15,7 @@ from jwt.algorithms import RSAAlgorithm  # ty: ignore[possibly-missing-import]
 from onyx.configs.app_configs import JWT_PUBLIC_KEY_URL
 from onyx.utils.logger import setup_logger
 
+
 logger = setup_logger()
 
 

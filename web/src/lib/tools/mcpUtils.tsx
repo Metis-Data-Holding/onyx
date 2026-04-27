@@ -1,7 +1,8 @@
 import { SOURCE_METADATA_MAP } from "../sources";
 import { MCPServer } from "./interfaces";
+import { DatabaseIcon, FileIcon } from "@/components/icons/icons";
 import type { IconProps } from "@opal/types";
-import { SvgFileText, SvgServer } from "@opal/icons";
+import { SvgServer } from "@opal/icons";
 
 /**
  * Get an appropriate icon for an MCP server based on its URL and name.
@@ -29,10 +30,10 @@ export function getActionIcon(
     url.includes("mongodb") ||
     url.includes("redis")
   ) {
-    return SvgServer;
+    return DatabaseIcon;
   }
   if (url.includes("filesystem") || name.includes("file system")) {
-    return SvgFileText;
+    return FileIcon;
   }
 
   return SvgServer;

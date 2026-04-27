@@ -8,8 +8,7 @@ import {
 } from "@/lib/tools/interfaces";
 import LineItem from "@/refresh-components/buttons/LineItem";
 import SimpleLoader from "@/refresh-components/loaders/SimpleLoader";
-import { noProp } from "@/lib/utils";
-import { cn } from "@opal/utils";
+import { cn, noProp } from "@/lib/utils";
 import type { IconProps } from "@opal/types";
 import {
   SvgCheck,

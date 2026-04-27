@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { MessageCard, Button } from "@opal/components";
+import { MessageCard } from "@opal/components/cards/message-card/components";
+import { Button } from "@opal/components/buttons/button/components";
 
 const meta: Meta<typeof MessageCard> = {
   title: "opal/components/MessageCard",

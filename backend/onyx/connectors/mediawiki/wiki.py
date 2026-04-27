@@ -26,6 +26,7 @@ from onyx.connectors.models import ImageSection
 from onyx.connectors.models import TextSection
 from onyx.utils.logger import setup_logger
 
+
 logger = setup_logger()
 
 pywikibot.config.base_dir = tempfile.TemporaryDirectory().name

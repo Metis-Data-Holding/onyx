@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@opal/utils";
+import { cn } from "@/lib/utils";
 import { Button, MessageCard } from "@opal/components";
 
 interface ConnectorInfoOverlayProps {

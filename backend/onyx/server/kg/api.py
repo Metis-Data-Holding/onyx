@@ -39,6 +39,7 @@ from onyx.tools.tool_implementations.knowledge_graph.knowledge_graph_tool import
 )
 from onyx.tools.tool_implementations.search.search_tool import SearchTool
 
+
 admin_router = APIRouter(prefix="/admin/kg")
 
 

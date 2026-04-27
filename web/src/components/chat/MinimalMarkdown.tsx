@@ -11,8 +11,7 @@ import rehypeHighlight from "rehype-highlight";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import "katex/dist/katex.min.css";
-import { transformLinkUri } from "@/lib/utils";
-import { cn } from "@opal/utils";
+import { cn, transformLinkUri } from "@/lib/utils";
 
 type MinimalMarkdownComponentOverrides = Partial<Components>;
 

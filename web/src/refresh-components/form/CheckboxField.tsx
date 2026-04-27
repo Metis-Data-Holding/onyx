@@ -1,7 +1,7 @@
 "use client";
 
 import { useField } from "formik";
-import { Checkbox, type CheckboxProps } from "@opal/components";
+import Checkbox, { CheckboxProps } from "@/refresh-components/inputs/Checkbox";
 import { useOnChangeValue } from "@/hooks/formHooks";
 
 interface CheckboxFieldProps extends Omit<CheckboxProps, "checked"> {

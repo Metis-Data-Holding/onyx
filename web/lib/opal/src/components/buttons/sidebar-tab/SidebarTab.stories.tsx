@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { SidebarTab } from "@opal/components";
+import { SidebarTab } from "@opal/components/buttons/sidebar-tab/components";
 import {
   SvgSettings,
   SvgUsers,
@@ -8,6 +8,7 @@ import {
   SvgTrash,
 } from "@opal/icons";
 import { Button } from "@opal/components";
+import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 
 const meta: Meta<typeof SidebarTab> = {
   title: "opal/components/SidebarTab",
@@ -15,9 +16,11 @@ const meta: Meta<typeof SidebarTab> = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div style={{ width: 260, background: "var(--background-neutral-01)" }}>
-        <Story />
-      </div>
+      <TooltipPrimitive.Provider>
+        <div style={{ width: 260, background: "var(--background-neutral-01)" }}>
+          <Story />
+        </div>
+      </TooltipPrimitive.Provider>
     ),
   ],
 };

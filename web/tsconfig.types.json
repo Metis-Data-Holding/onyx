@@ -1,8 +1,6 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "target": "ES2017",
-    "moduleResolution": "bundler",
     "paths": {
       "@/*": ["./src/*"],
       "@tests/*": ["./tests/*"],

@@ -19,6 +19,7 @@ from onyx.connectors.salesforce.utils import validate_salesforce_id
 from onyx.utils.logger import setup_logger
 from shared_configs.utils import batch_list
 
+
 logger = setup_logger()
 
 

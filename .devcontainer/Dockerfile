@@ -14,13 +14,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   openssh-client \
   python3-venv \
   ripgrep \
-  socat \
   sudo \
   ca-certificates \
   iptables \
   ipset \
   iproute2 \
-  dnsmasq \
   dnsutils \
   unzip \
   wget \

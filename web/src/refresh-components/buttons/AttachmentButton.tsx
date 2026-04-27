@@ -70,9 +70,9 @@ import IconButton from "@/refresh-components/buttons/IconButton";
 import { Button } from "@opal/components";
 import Text from "@/refresh-components/texts/Text";
 import type { IconProps } from "@opal/types";
-import { Checkbox } from "@opal/components";
+import Checkbox from "@/refresh-components/inputs/Checkbox";
 import { SvgExternalLink } from "@opal/icons";
-import type { WithoutStyles } from "@opal/types";
+import { WithoutStyles } from "@/types";
 
 export interface AttachmentProps
   extends WithoutStyles<React.ButtonHTMLAttributes<HTMLButtonElement>> {

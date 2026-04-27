@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { cn } from "@opal/utils";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import type { Route } from "next";
 import type { IconProps } from "@opal/types";

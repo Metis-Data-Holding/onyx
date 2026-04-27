@@ -1,15 +1,15 @@
 "use client";
 
-import { cn } from "@opal/utils";
+import { cn } from "@/lib/utils";
 import Text from "@/refresh-components/texts/Text";
 import {
-  SvgConfluence,
-  SvgGithub,
-  SvgGoogleDrive,
-  SvgHubspot,
-  SvgNotion,
-  SvgSlack,
-} from "@opal/logos";
+  ConfluenceIcon,
+  GoogleDriveIcon,
+  GithubIcon,
+  NotionIcon,
+  ColorSlackIcon,
+  HubSpotIcon,
+} from "@/components/icons/icons";
 import { SvgChevronRight, SvgCalendar } from "@opal/icons";
 import { useBuildConnectors } from "@/app/craft/hooks/useBuildConnectors";
 import {
@@ -89,19 +89,19 @@ export default function ConnectorBannersRow({
           {/* Outermost - no movement */}
           <div>
             <IconWrapper>
-              <SvgSlack size={16} />
+              <ColorSlackIcon size={16} />
             </IconWrapper>
           </div>
           {/* Middle - slight movement */}
           <div className="transition-transform duration-200 group-hover:translate-x-2">
             <IconWrapper>
-              <SvgGoogleDrive size={16} />
+              <GoogleDriveIcon size={16} />
             </IconWrapper>
           </div>
           {/* Innermost - moves towards center */}
           <div className="transition-transform duration-200 group-hover:translate-x-4">
             <IconWrapper>
-              <SvgConfluence size={16} />
+              <ConfluenceIcon size={16} />
             </IconWrapper>
           </div>
         </div>
@@ -119,19 +119,19 @@ export default function ConnectorBannersRow({
           {/* Innermost - moves towards center */}
           <div className="transition-transform duration-200 group-hover:-translate-x-4">
             <IconWrapper>
-              <SvgGithub size={16} />
+              <GithubIcon size={16} />
             </IconWrapper>
           </div>
           {/* Middle - slight movement */}
           <div className="transition-transform duration-200 group-hover:-translate-x-2">
             <IconWrapper>
-              <SvgNotion size={16} />
+              <NotionIcon size={16} />
             </IconWrapper>
           </div>
           {/* Outermost - no movement */}
           <div>
             <IconWrapper>
-              <SvgHubspot size={16} />
+              <HubSpotIcon size={16} />
             </IconWrapper>
           </div>
         </div>

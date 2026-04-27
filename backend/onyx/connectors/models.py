@@ -231,8 +231,6 @@ class DocumentBase(BaseModel):
     # Set during docfetching after hierarchy nodes are cached
     parent_hierarchy_node_id: int | None = None
 
-    file_id: str | None = None
-
     def get_title_for_document_index(
         self,
     ) -> str | None:
@@ -372,7 +370,6 @@ class Document(DocumentBase):
             secondary_owners=base.secondary_owners,
             title=base.title,
             from_ingestion_api=base.from_ingestion_api,
-            file_id=base.file_id,
         )
 
     def __sizeof__(self) -> int:
