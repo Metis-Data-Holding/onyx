@@ -9,7 +9,7 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 120
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -35,7 +35,12 @@ jobs:
         run: |
           set -euo pipefail
 
-          ssh -p "${BYTEPLUS_SERVER_PORT}" "${BYTEPLUS_SERVER_USER}@${BYTEPLUS_SERVER_HOST}" \
+          ssh \
+            -o ServerAliveInterval=30 \
+            -o ServerAliveCountMax=120 \
+            -o TCPKeepAlive=yes \
+            -p "${BYTEPLUS_SERVER_PORT}" \
+            "${BYTEPLUS_SERVER_USER}@${BYTEPLUS_SERVER_HOST}" \
             "BYTEPLUS_DEPLOY_PATH='${BYTEPLUS_DEPLOY_PATH}' GITHUB_REPOSITORY='${GITHUB_REPOSITORY}' bash -s" <<'EOF'
           set -euo pipefail
 
