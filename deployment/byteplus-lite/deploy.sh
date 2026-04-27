@@ -84,6 +84,9 @@ echo "Starting docker compose deployment..."
 # Keep HOST_PORT aligned with the .env file so compose and the health check use the same port.
 compose up -d --build --remove-orphans
 
+echo "Recreating nginx to refresh upstream container addresses..."
+compose up -d --force-recreate --no-deps nginx
+
 echo "Showing docker compose status..."
 compose ps
 
